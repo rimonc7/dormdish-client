@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 
 const MealCard = ({ item }) => {
-    const { title, image, price, rating, description } = item;
+    const { title, image, price, rating, description,_id } = item;
 
 
     return (
@@ -29,11 +30,12 @@ const MealCard = ({ item }) => {
                     />
                     <p className="text-gray-600 text-center text-sm mb-6">{description}</p>
                     <div className="w-full">
-                        <button
+                        <Link
+                            to={`/meal/${_id}`}
                             className="w-full btn btn-primary border-none text-white py-3 rounded-lg font-medium bg-orange-500 hover:bg-orange-600 transition duration-300"
                         >
                             View Details
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>
