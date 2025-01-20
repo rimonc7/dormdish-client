@@ -3,6 +3,7 @@ import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import SocialLogin from "../../Shared/SocialLogin/SocialLogin.Jsx";
 
 const JoinUs = () => {
     const { register, handleSubmit, reset } = useForm();
@@ -32,11 +33,11 @@ const JoinUs = () => {
                 });
             })
             .then(() => {
-                reset(); // Reset form after successful user creation
-                setErrorMessage(""); // Clear error message
+                reset(); 
+                setErrorMessage(""); 
             })
             .catch((error) => {
-                setErrorMessage(error.message); // Set error message
+                setErrorMessage(error.message); 
             });
     };
 
@@ -105,7 +106,18 @@ const JoinUs = () => {
                         Join Now
                     </button>
                 </form>
-
+                <div className="mt-8 text-center">
+                    <p className="text-gray-700">
+                        Already have an account?{" "}
+                        <a
+                            href="/login"
+                            className="text-orange-500 hover:underline font-semibold"
+                        >
+                            Log in
+                        </a>
+                    </p>
+                </div>
+                <SocialLogin></SocialLogin>
                 {/* Display Error Message */}
                 {errorMessage && (
                     <div className="mt-4 p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-lg">
