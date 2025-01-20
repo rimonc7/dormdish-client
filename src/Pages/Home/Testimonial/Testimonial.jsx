@@ -53,20 +53,20 @@ const Testimonial = () => {
             <div className="absolute inset-0 bg-black bg-opacity-60"></div>
             <div className="relative max-w-2xl mx-auto text-center z-10">
                 <h2 className="text-3xl font-bold mb-6">Testimonials</h2>
-                <FaQuoteLeft className="text-4xl text-accent mx-auto mb-4" />
+                <FaQuoteLeft className="text-4xl mx-auto mb-4 text-orange-500" />
                 <p className="text-lg italic mb-6">
                     {testimonials[currentIndex].text}
                 </p>
                 <h3 className="text-xl font-semibold">{testimonials[currentIndex].name}</h3>
                 <div className="flex justify-center gap-4 mt-6">
                     <button
-                        className="btn btn-circle btn-outline text-white font-bold"
+                        className="btn btn-circle btn-outline text-orange-500 font-bold"
                         onClick={handlePrev}
                     >
                         <FaArrowLeft />
                     </button>
                     <button
-                        className="btn btn-circle btn-outline text-white font-bold"
+                        className="btn btn-circle btn-outline text-orange-500 font-bold"
                         onClick={handleNext}
                     >
                         <FaArrowRight />

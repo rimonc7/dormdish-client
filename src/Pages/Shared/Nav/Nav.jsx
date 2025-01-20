@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import './Nav.css'
 
 const Nav = () => {
-    const user = true;
+    const user = false;
 
     const links = (
         <div className="space-y-2 lg:space-x-4 lg:space-y-0 uppercase">
