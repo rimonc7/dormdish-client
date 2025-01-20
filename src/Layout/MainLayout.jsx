@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Nav from "../Pages/Shared/Nav";
+import Nav from "../Pages/Shared/Nav/Nav";
 
 const MainLayout = () => {
     return (
