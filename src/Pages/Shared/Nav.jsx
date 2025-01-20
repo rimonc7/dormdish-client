@@ -1,19 +1,20 @@
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaBell } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import './Nav.css'
 
 const Nav = () => {
-    const user = false;
+    const user = true;
 
     const links = (
         <div className="space-y-2 lg:space-x-4 lg:space-y-0 uppercase">
             <NavLink to="/" className="block lg:inline text-white hover:text-orange-300">
                 HOME
             </NavLink>
-            <NavLink to="/contact" className="block lg:inline text-white hover:text-orange-300">
-                CONTACT US
+            <NavLink to="/meals" className="block lg:inline text-white hover:text-orange-300">
+                MEALS
             </NavLink>
-            <NavLink to="/menu" className="block lg:inline text-white hover:text-orange-300">
-                OUR MENU
+            <NavLink to="/upcomingMeals" className="block lg:inline text-white hover:text-orange-300">
+                UPCOMING MEALS
             </NavLink>
             <NavLink to="/shop/salad" className="block lg:inline text-white hover:text-orange-300">
                 OUR SHOP
@@ -36,10 +37,10 @@ const Nav = () => {
                         Login
                     </NavLink>
                     <NavLink
-                        to="/signUp"
+                        to="/joinUs"
                         className="block lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300"
                     >
-                        Sign Up
+                        Join Us
                     </NavLink>
                 </>
             )}
@@ -47,7 +48,7 @@ const Nav = () => {
     );
 
     return (
-        <div className="navbar fixed z-10 bg-gradient-to-r from-blue-500 to-orange-400 text-white shadow-lg">
+        <div className="navbar bg-gradient-to-r from-blue-500 to-orange-400 text-white shadow-lg">
             <div className="navbar-start">
                 {/* Dropdown for small screens */}
                 <div className="dropdown lg:hidden">
@@ -84,7 +85,15 @@ const Nav = () => {
                 <ul className="menu menu-horizontal px-1 space-x-4">{links}</ul>
             </div>
 
-            <div className="navbar-end">
+            {/* Navbar End */}
+            <div className="navbar-end flex items-center space-x-4">
+                {/* notification icon */}
+                <div className="relative">
+                    <FaBell className="text-2xl cursor-pointer hover:text-orange-300" />
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1">
+                        3
+                    </span>
+                </div>
                 <div className="hidden lg:flex">{authLinks}</div>
                 {user ? (
                     <img
