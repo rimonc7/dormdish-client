@@ -1,6 +1,7 @@
 import Banner from "./Banner/Banner";
 import MealsByCategory from "./MealsByCategory/MealsByCategory";
 import Membership from "./Membership/Membership";
+import Testimonial from "./Testimonial/Testimonial";
 
 const Home = () => {
     return (
@@ -8,6 +9,7 @@ const Home = () => {
             <Banner></Banner>
             <MealsByCategory></MealsByCategory>
             <Membership></Membership>
+            <Testimonial></Testimonial>
         </div>
     );
 };

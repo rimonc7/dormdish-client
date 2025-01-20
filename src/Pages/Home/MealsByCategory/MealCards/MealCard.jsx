@@ -2,12 +2,11 @@ import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 
 const MealCard = ({ item }) => {
-    const { title, image, price, rating, description,_id } = item;
-
+    const { title, image, price, rating, description, _id } = item;
 
     return (
         <div className="flex justify-center p-6">
-            <div className="bg-gradient-to-br from-blue-100 to-orange-100 w-80 rounded-lg shadow-2xl overflow-hidden flex flex-col items-center transform transition duration-500 hover:scale-105">
+            <div className="bg-gradient-to-br from-blue-100 to-orange-100 w-80 rounded-lg shadow-2xl overflow-hidden flex flex-col transform transition duration-500 hover:scale-105">
                 <figure className="relative w-full">
                     <img
                         src={image}
@@ -18,8 +17,9 @@ const MealCard = ({ item }) => {
                         ${price}
                     </p>
                 </figure>
-                <div className="flex flex-col items-center p-6 space-y-4">
+                <div className="flex-grow flex flex-col items-center p-6 space-y-4">
                     <h2 className="text-3xl font-bold text-gray-800 tracking-wide">{title}</h2>
+
                     <StarRatings
                         rating={rating}
                         starRatedColor="orange"
@@ -28,15 +28,17 @@ const MealCard = ({ item }) => {
                         starDimension="25px"
                         starSpacing="3px"
                     />
-                    <p className="text-gray-600 text-center text-sm mb-6">{description}</p>
-                    <div className="w-full">
-                        <Link
-                            to={`/meal/${_id}`}
-                            className="w-full btn btn-primary border-none text-white py-3 rounded-lg font-medium bg-orange-500 hover:bg-orange-600 transition duration-300"
-                        >
-                            View Details
-                        </Link>
-                    </div>
+
+                    <p className="text-gray-600 text-center text-sm">{description}</p>
+                </div>
+
+                <div className="w-full">
+                    <Link
+                        to={`/meal/${_id}`}
+                        className="block btn btn-primary border-none text-white py-3 rounded-lg font-medium bg-orange-500 hover:bg-orange-600 transition duration-300"
+                    >
+                        View Details
+                    </Link>
                 </div>
             </div>
         </div>

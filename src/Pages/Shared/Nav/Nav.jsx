@@ -48,7 +48,7 @@ const Nav = () => {
     );
 
     return (
-        <div className="navbar fixed z-10 bg-gradient-to-r from-blue-500 to-orange-400 bg-opacity-50 text-white shadow-lg">
+        <div className="navbar fixed z-20 bg-gradient-to-r from-blue-500 to-orange-400 bg-opacity-50 text-white shadow-lg">
             <div className="navbar-start">
                 {/* Dropdown for small screens */}
                 <div className="dropdown lg:hidden">

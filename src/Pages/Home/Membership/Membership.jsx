@@ -44,7 +44,7 @@ const Membership = () => {
                     <div
                         key={pkg.name}
                         onClick={() => handlePackageClick(pkg.name.toLowerCase())}
-                        className={`cursor-pointer ${pkg.bgClass} rounded-lg shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300`}
+                        className={`flex flex-col justify-between cursor-pointer ${pkg.bgClass} rounded-lg shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300`}
                     >
                         <h2 className="text-2xl font-bold text-gray-800 mb-2">{pkg.name}</h2>
                         <p className="text-lg font-semibold text-gray-700 mb-4">{pkg.price}</p>
@@ -57,9 +57,11 @@ const Membership = () => {
                                 </li>
                             ))}
                         </ul>
-                        <button className="bg-gray-800 text-white py-2 px-6 rounded-md hover:bg-gray-900 transition-colors">
-                            Select {pkg.name}
-                        </button>
+                        <div className="mt-auto">
+                            <button className="bg-gray-800 text-white py-2 px-6 rounded-md hover:bg-gray-900 transition-colors">
+                                Select {pkg.name}
+                            </button>
+                        </div>
                     </div>
                 ))}
             </div>
