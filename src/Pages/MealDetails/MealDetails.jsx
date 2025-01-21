@@ -13,7 +13,7 @@ const MealDetails = () => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const [liked, setLiked] = useState(false);
-
+    const [reviewText, setReviewText] = useState('');
 
     const { data: meal = {}, isLoading, refetch } = useQuery({
         queryKey: ['meal', id],
@@ -23,13 +23,23 @@ const MealDetails = () => {
         },
     });
 
-    const { data: userDb = {}, isPending } = useQuery({
+    const { data: userDb = {} } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosPublic.get(`/users/${user.email}`);
             return res.data;
         }
     });
+
+    const { data: reviews = {} } = useQuery({
+        queryKey: ['reviews'],
+        queryFn: async () => {
+            const res = await axiosPublic.get('/review');
+            return res.data;
+        }
+    });
+
+    console.log(reviews)
 
     if (isLoading) {
         return <p className="text-center text-lg mt-20">Loading...</p>;
@@ -74,7 +84,7 @@ const MealDetails = () => {
             const mealReqInfo = {
                 email: user.email,
                 mealId: _id,
-                status:'pending',
+                status: 'pending',
                 price,
                 image,
                 title
@@ -92,8 +102,27 @@ const MealDetails = () => {
         }
     };
 
-
+    const handleReviewText = e => {
+        const text = e.target.value;
+        setReviewText(text)
+    }
     const handleAddReview = () => {
+        const reviewInfo = {
+            name: user.displayName,
+            review: reviewText
+        }
+
+        axiosPublic.post('/review', reviewInfo)
+            .then(res => {
+                if (res.data.insertedId) {
+                    document.getElementById('my_modal_1').close();
+                    Swal.fire({
+                        title: "Submitted Review",
+                        icon: "success",
+                        draggable: true
+                    });
+                }
+            })
     };
 
     return (
@@ -166,7 +195,7 @@ const MealDetails = () => {
 
                         {/* Add Review Button */}
                         <button
-                            onClick={handleAddReview}
+                            onClick={() => document.getElementById('my_modal_1').showModal()}
                             className="flex items-center justify-center gap-2 px-6 py-3 text-white font-medium rounded-lg shadow-md bg-blue-500 hover:bg-blue-600 transition"
                         >
                             <FaCommentDots />
@@ -180,24 +209,48 @@ const MealDetails = () => {
             <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-8 lg:p-16 mt-12">
                 <h3 className="text-3xl font-bold text-gray-800 mb-6">Customer Reviews</h3>
                 <div className="space-y-6">
-                    {/* Review 1 */}
-                    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                        <h4 className="text-xl font-semibold text-gray-800">John Doe</h4>
-                        <p className="text-gray-600 mt-2">
-                            "The meal was absolutely delicious! The flavors were perfectly balanced, and the ingredients
-                            were fresh. Highly recommended!"
-                        </p>
-                    </div>
-                    {/* Review 2 */}
-                    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                        <h4 className="text-xl font-semibold text-gray-800">Jane Smith</h4>
-                        <p className="text-gray-600 mt-2">
-                            "I loved this dish! It was flavorful and satisfying. The presentation was excellent as well.
-                            Would definitely order again!"
-                        </p>
-                    </div>
+                    {
+                        reviews.map((review, idx) => (
+                            <div key={idx} className="bg-gray-100 p-6 rounded-lg shadow-md">
+                                <h4 className="text-xl font-semibold text-gray-800">{review.name}</h4>
+                                <p className="text-gray-600 mt-2">{review.review}</p>
+                            </div>
+                        ))
+                    }
+
                 </div>
             </div>
+            <dialog id="my_modal_1" className="modal">
+                <div className="modal-box bg-white rounded-lg shadow-lg p-8">
+                    <h3 className="font-bold text-2xl text-gray-800 mb-4">Write a Review</h3>
+                    <p className="text-gray-600 mb-6">Share your thoughts about this meal. Your feedback is valuable to us!</p>
+
+                    {/* Textarea for review input */}
+                    <textarea
+                        onChange={handleReviewText}
+                        className="textarea textarea-bordered w-full h-32 resize-none mb-6 rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        placeholder="Write your review here..."
+                    ></textarea>
+
+                    <div className="modal-action flex justify-end gap-4">
+                        {/* Submit Button */}
+                        <button
+                            onClick={handleAddReview}
+                            className="px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow hover:bg-blue-600 transition duration-200"
+                        >
+                            Submit Review
+                        </button>
+
+                        {/* Close Button */}
+                        <button
+                            className="px-6 py-2 bg-gray-300 text-gray-800 font-semibold rounded-lg shadow hover:bg-gray-400 transition duration-200"
+                            onClick={() => document.getElementById('my_modal_1').close()}
+                        >
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </dialog>
         </div>
     );
 };
