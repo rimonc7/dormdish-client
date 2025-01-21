@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SocialLogin = () => {
     const { loginWithGoogle, setErrorMessage } = useContext(AuthContext);
@@ -13,6 +14,11 @@ const SocialLogin = () => {
         setErrorMessage('');
         loginWithGoogle()
             .then(userCredential => {
+                Swal.fire({
+                    title: "Login Success",
+                    icon: "success",
+                    draggable: true
+                });
                 navigate(from, { replace: true });
                 // TODO: Send user data to database
             })

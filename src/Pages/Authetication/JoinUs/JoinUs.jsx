@@ -4,10 +4,16 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin.Jsx";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const JoinUs = () => {
     const { register, handleSubmit, reset } = useForm();
     const { createUserWithEmail, setErrorMessage, errorMessage } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from || '/';
 
     const handleCreateUser = async (data) => {
         const { name, photo, email, password } = data; // Extract all fields
@@ -33,11 +39,17 @@ const JoinUs = () => {
                 });
             })
             .then(() => {
-                reset(); 
-                setErrorMessage(""); 
+                reset();
+                setErrorMessage("");
+                Swal.fire({
+                    title: "Success",
+                    icon: "success",
+                    draggable: true
+                });
+                navigate(from, { replace: true })
             })
             .catch((error) => {
-                setErrorMessage(error.message); 
+                setErrorMessage(error.message);
             });
     };
 
@@ -109,12 +121,12 @@ const JoinUs = () => {
                 <div className="mt-8 text-center">
                     <p className="text-gray-700">
                         Already have an account?{" "}
-                        <a
-                            href="/login"
+                        <Link
+                            to='/login'
                             className="text-orange-500 hover:underline font-semibold"
                         >
                             Log in
-                        </a>
+                        </Link>
                     </p>
                 </div>
                 <SocialLogin></SocialLogin>

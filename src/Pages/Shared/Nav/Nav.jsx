@@ -1,9 +1,11 @@
 import { FaUserCircle, FaBell } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import './Nav.css'
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Nav = () => {
-    const user = false;
+    const { user, logOutUser } = useContext(AuthContext);
 
     const links = (
         <div className="space-y-2 lg:space-x-4 lg:space-y-0 uppercase">
@@ -25,7 +27,9 @@ const Nav = () => {
     const authLinks = (
         <div className="space-y-2 lg:space-x-4 lg:space-y-0 uppercase">
             {user ? (
-                <button className="block lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300">
+                <button
+                    onClick={() => logOutUser()}
+                    className="block lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300">
                     Logout
                 </button>
             ) : (
