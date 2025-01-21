@@ -6,22 +6,23 @@ import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin.Jsx";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hook/useAxiosPublic";
 
 const JoinUs = () => {
     const { register, handleSubmit, reset } = useForm();
     const { createUserWithEmail, setErrorMessage, errorMessage } = useContext(AuthContext);
-
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || '/';
 
+    const axiosPublic = useAxiosPublic();
+
     const handleCreateUser = async (data) => {
-        const { name, photo, email, password } = data; // Extract all fields
+        const { name, photo, email, password } = data;
         setErrorMessage("");
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-        // Password Validation
         if (!passwordRegex.test(password)) {
             setErrorMessage(
                 "Password must be at least 6 characters long and contain at least one uppercase letter and one lowercase letter."
@@ -36,17 +37,29 @@ const JoinUs = () => {
                 return updateProfile(user, {
                     displayName: name,
                     photoURL: photo,
-                });
+                }).then(() => user);
             })
-            .then(() => {
-                reset();
-                setErrorMessage("");
-                Swal.fire({
-                    title: "Success",
-                    icon: "success",
-                    draggable: true
-                });
-                navigate(from, { replace: true })
+            .then((user) => {
+
+                const userInfo = {
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL,
+                    badge: 'bronze'
+                };
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                title: "Success",
+                                icon: "success",
+                                draggable: true
+                            });
+                            reset();
+                            setErrorMessage("");
+                            navigate(from, { replace: true })
+                        }
+                    })
             })
             .catch((error) => {
                 setErrorMessage(error.message);

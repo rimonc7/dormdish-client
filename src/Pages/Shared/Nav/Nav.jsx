@@ -101,13 +101,13 @@ const Nav = () => {
                 <div className="hidden lg:flex">{authLinks}</div>
                 {user ? (
                     <img
-                        className="w-10 h-10 mx-4 rounded-full"
-                        src="/path-to-default-avatar.jpg"
-                        alt="User Avatar"
-                        title="Logged in User"
+                        className="w-12 h-12 mx-6 rounded-full"
+                        src={user.photoURL}
+                        alt=""
+                        title={user.displayName || "User"}
                     />
                 ) : (
-                    <FaUserCircle className="text-3xl mx-4" title="Guest User" />
+                    <FaUserCircle className="text-4xl mx-6" title="Guest User" />
                 )}
             </div>
         </div>

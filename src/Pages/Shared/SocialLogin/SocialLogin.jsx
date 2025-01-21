@@ -3,24 +3,34 @@ import { FaFacebookF, FaGoogle, FaTwitter } from "react-icons/fa";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hook/useAxiosPublic";
 
 const SocialLogin = () => {
     const { loginWithGoogle, setErrorMessage } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from || '/';
+    const axiosPublic = useAxiosPublic();
 
     const handleGoogleLogin = () => {
         setErrorMessage('');
         loginWithGoogle()
             .then(userCredential => {
-                Swal.fire({
-                    title: "Login Success",
-                    icon: "success",
-                    draggable: true
-                });
-                navigate(from, { replace: true });
-                // TODO: Send user data to database
+                const userInfo = {
+                    name: userCredential.user?.displayName,
+                    email: userCredential.user?.email,
+                    photo: userCredential.user?.photoURL,
+                    badge: 'bronze'
+                };
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        Swal.fire({
+                            title: "Success",
+                            icon: "success",
+                            draggable: true
+                        });
+                        navigate(from, { replace: true });
+                    })
             })
             .catch((error) => {
                 setErrorMessage(error.message);
