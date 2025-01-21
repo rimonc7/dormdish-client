@@ -1,8 +1,19 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
+import { useEffect } from "react";
 
 const Membership = () => {
     const navigate = useNavigate();
+    const { hash } = useLocation();
+
+    useEffect(() => {
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    }, [hash]);
 
     const packages = [
         {
@@ -33,7 +44,7 @@ const Membership = () => {
     };
 
     return (
-        <div className=" bg-gray-100 flex flex-col items-center justify-center p-6">
+        <div id="subscription" className=" bg-gray-100 flex flex-col items-center justify-center p-6">
             <SectionTitle
                 heading={'Choose Your Premium Package'}
             >

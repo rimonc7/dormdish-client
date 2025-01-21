@@ -12,7 +12,8 @@ const MealDetails = () => {
     const axiosPublic = useAxiosPublic();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
-    const [liked, setLiked] = useState(false)
+    const [liked, setLiked] = useState(false);
+
 
     const { data: meal = {}, isLoading, refetch } = useQuery({
         queryKey: ['meal', id],
@@ -22,12 +23,19 @@ const MealDetails = () => {
         },
     });
 
+    const { data: userDb = {}, isPending } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosPublic.get(`/users/${user.email}`);
+            return res.data;
+        }
+    });
 
     if (isLoading) {
         return <p className="text-center text-lg mt-20">Loading...</p>;
     }
 
-    const { title, image, price, rating, description, distributorName, ingredients, postTime, like } = meal;
+    const { title, image, price, rating, description, distributorName, ingredients, postTime, like, _id } = meal;
 
     const handleLike = () => {
         if (!user) {
@@ -44,7 +52,46 @@ const MealDetails = () => {
     };
 
     const handleMealRequest = () => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
+        if (userDb.badge == 'bronze') {
+            Swal.fire({
+                title: "Subscription Required",
+                text: "You need a subscription to request meals.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Want to Subscribe?"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    navigate('/#subscription')
+                }
+            });
+        } else {
+            const mealReqInfo = {
+                email: user.email,
+                mealId: _id,
+                status:'pending',
+                price,
+                image,
+                title
+            }
+            axiosPublic.post('/mealReq', mealReqInfo)
+                .then(res => {
+                    if (res.data.insertedId) {
+                        Swal.fire({
+                            title: "Meal Requested Successfully",
+                            icon: "success",
+                            draggable: true
+                        });
+                    }
+                })
+        }
     };
+
 
     const handleAddReview = () => {
     };
