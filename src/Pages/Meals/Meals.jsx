@@ -3,6 +3,8 @@ import axios from "axios";
 import MealCard from "../Home/MealsByCategory/MealCards/MealCard";
 import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
+import InfiniteScroll from 'react-infinite-scroller';
+
 
 const Meals = () => {
     const [search, setSearch] = useState("");

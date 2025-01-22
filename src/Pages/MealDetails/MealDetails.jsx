@@ -31,7 +31,9 @@ const MealDetails = () => {
         }
     });
 
-    const { data: reviews = {} } = useQuery({
+
+
+    const { data: reviews = [], refetch: reviewRefetch } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
             const res = await axiosPublic.get('/review');
@@ -39,7 +41,7 @@ const MealDetails = () => {
         }
     });
 
-    console.log(reviews)
+    const filteredReviews = reviews.filter(review => review.mealId === id);
 
     if (isLoading) {
         return <p className="text-center text-lg mt-20">Loading...</p>;
@@ -107,8 +109,17 @@ const MealDetails = () => {
         setReviewText(text)
     }
     const handleAddReview = () => {
+        if (!user) {
+            navigate('/login');
+            return;
+        }
+        if (reviewText.trim().length < 10) {
+            alert('Please write at least 10 characters for your review.');
+            return;
+        }
         const reviewInfo = {
             name: user.displayName,
+            mealId: _id,
             review: reviewText
         }
 
@@ -121,6 +132,7 @@ const MealDetails = () => {
                         icon: "success",
                         draggable: true
                     });
+                    reviewRefetch();
                 }
             })
     };
@@ -209,15 +221,16 @@ const MealDetails = () => {
             <div className="max-w-6xl mx-auto bg-white rounded-lg shadow-lg p-8 lg:p-16 mt-12">
                 <h3 className="text-3xl font-bold text-gray-800 mb-6">Customer Reviews</h3>
                 <div className="space-y-6">
-                    {
-                        reviews.map((review, idx) => (
+                    {filteredReviews.length > 0 ? (
+                        filteredReviews.map((review, idx) => (
                             <div key={idx} className="bg-gray-100 p-6 rounded-lg shadow-md">
                                 <h4 className="text-xl font-semibold text-gray-800">{review.name}</h4>
                                 <p className="text-gray-600 mt-2">{review.review}</p>
                             </div>
                         ))
-                    }
-
+                    ) : (
+                        <p className="text-gray-600 text-lg text-center">No reviews found yet. Be the first to share your thoughts!</p>
+                    )}
                 </div>
             </div>
             <dialog id="my_modal_1" className="modal">
