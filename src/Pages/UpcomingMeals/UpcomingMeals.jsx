@@ -7,7 +7,7 @@ import UpComingMealCard from './UpComingMealCard';
 const UpcomingMeals = () => {
     const axiosPublic = useAxiosPublic();
 
-    const { data: upcomingMeal = [] } = useQuery({
+    const { data: upcomingMeal = [], refetch, isLoading } = useQuery({
         queryKey: ['upcomingMeal'],
         queryFn: async () => {
             const res = await axiosPublic.get('/upcomingMeal');
@@ -22,10 +22,10 @@ const UpcomingMeals = () => {
                 subheading={'Get Ready for a Feast of Flavors'}
             >
             </SectionTitle>
-
+            {isLoading && <p className="text-center py-10">Loading meals...</p>}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
                 {upcomingMeal.map(item => (
-                    <UpComingMealCard key={item._id} item={item} />
+                    <UpComingMealCard key={item._id} item={item} refetch={refetch} />
                 ))}
             </div>
         </div>

@@ -14,6 +14,8 @@ const MealDetails = () => {
     const navigate = useNavigate();
     const [liked, setLiked] = useState(false);
     const [reviewText, setReviewText] = useState('');
+  
+
 
     const { data: meal = {}, isLoading, refetch } = useQuery({
         queryKey: ['meal', id],
@@ -23,7 +25,7 @@ const MealDetails = () => {
         },
     });
 
-    const { data: userDb = {} } = useQuery({
+    const { data: userDb = [] } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosPublic.get(`/users/${user.email}`);

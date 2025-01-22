@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { FaHeart, FaThumbsUp } from 'react-icons/fa';
 import useAxiosPublic from '../../Hook/useAxiosPublic';
 
-const UpComingMealCard = ({ item }) => {
+const UpComingMealCard = ({ item, refetch }) => {
     const [liked, setLiked] = useState(false);
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
@@ -19,14 +19,25 @@ const UpComingMealCard = ({ item }) => {
             navigate('/login');
             return;
         }
-        axiosPublic.patch(`/upcomingMeal/${id}`)
+
+        const likedInfo = {
+            email: user.email
+        }
+        axiosPublic.patch(`/upcomingMeal/${id}`, likedInfo)
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     Swal.fire("Thanks for liking the meal!", "", "success");
                     setLiked(true);
+                    refetch()
                 }
             })
-            .catch(error => console.error("Error liking the meal:", error));
+            .catch(error => {
+                if (error.response && error.response.data && error.response.data.message) {
+                    Swal.fire("Error", error.response.data.message, "error");
+                } else {
+                    Swal.fire("Error", "Something went wrong. Please try again later.", "error");
+                }
+            });
     };
 
     return (
@@ -86,8 +97,8 @@ const UpComingMealCard = ({ item }) => {
                     onClick={() => handleLike(_id)}
                     disabled={liked}
                     className={`w-full flex items-center justify-center gap-2 px-6 py-3 text-white font-medium transition ${liked
-                            ? 'bg-red-500 cursor-not-allowed'
-                            : 'bg-gray-800 hover:bg-gray-900'
+                        ? 'bg-red-500 cursor-not-allowed'
+                        : 'bg-gray-800 hover:bg-gray-900'
                         }`}
                 >
                     <FaHeart />
