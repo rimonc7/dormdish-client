@@ -13,10 +13,10 @@ const MealsByCategory = () => {
 
 
     return (
-        <div>
+        <div className="mt-10">
             <SectionTitle
                 heading={'Explore Our Delicious Meals'}
-                subheading={'Choose from a variety of breakfast, lunch, and dinner options to satisfy your cravings. Find the perfect meal for any time of day!'}
+                subheading={'Explore breakfast, lunch, and dinner options to satisfy any craving!'}
             ></SectionTitle>
             <div className="my-10 text-center">
                 <Tabs>
