@@ -11,7 +11,7 @@ const UseUser = () => {
         queryFn: async () => {
             const res = await axiosPublic.get('/users');
             return res.data;
-        }
+        },
     });
 
     return [userDb, refetch, isUserLoading]

@@ -18,9 +18,16 @@ const Nav = () => {
             <NavLink to="/upcomingMeals" className="block lg:inline text-white hover:text-orange-300">
                 UPCOMING MEALS
             </NavLink>
-            <NavLink to="/shop/salad" className="block lg:inline text-white hover:text-orange-300">
+            <NavLink to="/shop" className="block lg:inline text-white hover:text-orange-300">
                 OUR SHOP
             </NavLink>
+
+            {
+                user && <NavLink to="/dashboard" className="block lg:inline text-white hover:text-orange-300">
+                    DASHBOARD
+                </NavLink>
+            }
+
         </div>
     );
 

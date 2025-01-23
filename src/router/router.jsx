@@ -8,6 +8,9 @@ import Login from "../Pages/Authetication/Login/Login";
 import JoinUs from "../Pages/Authetication/JoinUs/JoinUs";
 import Meals from "../Pages/Meals/Meals";
 import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
+import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import UserProfile from "../Pages/Dashboard/UserDashboard/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +43,16 @@ const router = createBrowserRouter([
         path: "/joinUs",
         element: <JoinUs></JoinUs>
     },
+    {
+        path: '/dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+            {
+                path: 'user-profile',
+                element:<UserProfile></UserProfile>
+            }
+        ]
+    }
 ]);
 
 export default router;
