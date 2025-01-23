@@ -3,9 +3,13 @@ import { NavLink } from "react-router-dom";
 import './Nav.css'
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useAdmin from "../../../Hook/useAdmin";
 
 const Nav = () => {
     const { user, logOutUser } = useContext(AuthContext);
+    const [isAdmin] = useAdmin();
+
+
 
     const links = (
         <div className="space-y-2 lg:space-x-4 lg:space-y-0 uppercase">
@@ -21,9 +25,13 @@ const Nav = () => {
             <NavLink to="/shop" className="block lg:inline text-white hover:text-orange-300">
                 OUR SHOP
             </NavLink>
-
             {
-                user && <NavLink to="/dashboard" className="block lg:inline text-white hover:text-orange-300">
+                user && isAdmin && <NavLink to="/dashboard/admin-profile" className="block lg:inline text-white hover:text-orange-300">
+                    DASHBOARD
+                </NavLink>
+            }
+            {
+                user && !isAdmin && <NavLink to="/dashboard/user-profile" className="block lg:inline text-white hover:text-orange-300">
                     DASHBOARD
                 </NavLink>
             }

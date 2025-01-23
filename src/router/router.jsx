@@ -13,6 +13,8 @@ import Dashboard from "../Layout/Dashboard";
 import UserProfile from "../Pages/Dashboard/UserDashboard/UserProfile";
 import RequestedMeals from "../Pages/Dashboard/UserDashboard/RequestedMeals";
 import MyReviews from "../Pages/Dashboard/UserDashboard/MyReviews";
+import AdminRoute from "./AdminRoute";
+import AdminProfile from "../Pages/Dashboard/AdminDashboard/AdminProfile";
 
 const router = createBrowserRouter([
     {
@@ -60,6 +62,12 @@ const router = createBrowserRouter([
             {
                 path: 'my-reviews',
                 element: <MyReviews></MyReviews>
+            },
+
+            //admin route
+            {
+                path: 'admin-profile',
+                element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
             }
         ]
     }

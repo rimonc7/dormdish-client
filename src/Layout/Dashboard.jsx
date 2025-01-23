@@ -2,9 +2,10 @@ import { FaUser, FaUsers, FaUtensils, FaListAlt, FaStar, FaConciergeBell, FaCale
 import logo from '../assets/dormdish-logo.png';
 import { NavLink, Outlet } from 'react-router-dom';
 import './Dashboard.css';
+import useAdmin from '../Hook/useAdmin';
 
 const Dashboard = () => {
-    const isAdmin = false;
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex">

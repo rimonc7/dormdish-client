@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import UseUser from "../../../Hook/UseUser";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import { FaUser, FaEnvelope, FaAward, FaUserShield } from "react-icons/fa"; // Importing React Icons
+import UseUser from "../../../Hook/UseUser";
+import { FaAward, FaEnvelope, FaUser, FaUserShield } from "react-icons/fa";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 
-const UserProfile = () => {
+const AdminProfile = () => {
     const [userDb, isUserLoading] = UseUser();
     const { user } = useContext(AuthContext);
 
@@ -36,7 +36,7 @@ const UserProfile = () => {
                         </p>
                         <p className="text-gray-600 text-lg flex items-center space-x-2">
                             <FaUserShield className="text-xl text-indigo-600" />
-                            <span>{currentUser.role || 'user'}</span>
+                            <span>{currentUser.role}</span>
                         </p>
                     </div>
                 </div>
@@ -52,4 +52,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default AdminProfile;
