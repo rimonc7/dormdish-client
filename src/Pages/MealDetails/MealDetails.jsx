@@ -14,7 +14,7 @@ const MealDetails = () => {
     const navigate = useNavigate();
     const [liked, setLiked] = useState(false);
     const [reviewText, setReviewText] = useState('');
-  
+
 
 
     const { data: meal = {}, isLoading, refetch } = useQuery({
@@ -88,8 +88,10 @@ const MealDetails = () => {
             const mealReqInfo = {
                 email: user.email,
                 mealId: _id,
+                review_count: filteredReviews.length,
                 status: 'pending',
                 price,
+                like,
                 image,
                 title
             }
