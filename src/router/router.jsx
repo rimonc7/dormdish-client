@@ -15,6 +15,7 @@ import RequestedMeals from "../Pages/Dashboard/UserDashboard/RequestedMeals";
 import MyReviews from "../Pages/Dashboard/UserDashboard/MyReviews";
 import AdminRoute from "./AdminRoute";
 import AdminProfile from "../Pages/Dashboard/AdminDashboard/AdminProfile";
+import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers";
 
 const router = createBrowserRouter([
     {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
             {
                 path: 'admin-profile',
                 element: <AdminRoute><AdminProfile></AdminProfile></AdminRoute>
+            },
+            {
+                path: 'manage-user',
+                element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
             }
         ]
     }
