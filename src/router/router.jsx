@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import UserProfile from "../Pages/Dashboard/UserDashboard/UserProfile";
 import RequestedMeals from "../Pages/Dashboard/UserDashboard/RequestedMeals";
+import MyReviews from "../Pages/Dashboard/UserDashboard/MyReviews";
 
 const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
             {
                 path: 'requested-meals',
                 element: <RequestedMeals></RequestedMeals>
+            },
+            {
+                path: 'my-reviews',
+                element: <MyReviews></MyReviews>
             }
         ]
     }

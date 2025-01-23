@@ -25,9 +25,9 @@ const RequestedMeals = () => {
             if (result.isConfirmed) {
                 axiosPublic.delete(`/mealReq/${id}`)
                     .then(res => {
-                        refetch();
                         if (res.data.deletedCount > 0) {
                             Swal.fire("Canceled", "", "success");
+                            refetch();
                         }
                     })
             }

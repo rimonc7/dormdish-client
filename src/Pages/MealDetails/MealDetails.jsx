@@ -123,6 +123,8 @@ const MealDetails = () => {
         }
         const reviewInfo = {
             name: user.displayName,
+            email: user.email,
+            title,
             mealId: _id,
             review: reviewText
         }
