@@ -55,6 +55,7 @@ const AuthProvider = ({ children }) => {
         errorMessage,
         setErrorMessage,
         user,
+        loading
     }
 
     return (
