@@ -5,8 +5,13 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
 
 const ManageUsers = () => {
-    const [userDb, refetch] = UseUser();
+    const [userDb, isUserLoading, refetch] = UseUser();
     const axiosPublic = useAxiosPublic();
+
+
+    if (isUserLoading) {
+        return <p className="text-center py-10 text-gray-600">Loading...</p>;
+    }
 
     const handleMakeAdmin = id => {
 

@@ -43,7 +43,7 @@ const MealDetails = () => {
         }
     });
 
-    const filteredReviews = reviews.filter(review => review.mealId === id);
+    const filteredReviews = reviews.filter(review => review.mealId === id).reverse();
 
     if (isLoading) {
         return <p className="text-center text-lg mt-20">Loading...</p>;
@@ -54,6 +54,7 @@ const MealDetails = () => {
     const handleLike = () => {
         if (!user) {
             navigate('/login')
+            return;
         }
         axiosPublic.patch(`/meal/${id}`)
             .then(res => {
@@ -131,7 +132,7 @@ const MealDetails = () => {
 
         axiosPublic.post('/review', reviewInfo)
             .then(res => {
-                if (res.data.insertedId) {
+                if (res.data.reviewId) {
                     document.getElementById('my_modal_1').close();
                     Swal.fire({
                         title: "Submitted Review",

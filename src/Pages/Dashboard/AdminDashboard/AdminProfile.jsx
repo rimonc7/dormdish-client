@@ -8,12 +8,15 @@ const AdminProfile = () => {
     const [userDb, isUserLoading] = UseUser();
     const { user } = useContext(AuthContext);
 
-    const currentUser = userDb.find(runningUser => runningUser.email === user?.email);
+    if (isUserLoading) {
+        return <p className="text-center py-10 text-gray-600">Loading...</p>;
+    }
+
+    const currentUser = userDb?.find(runningUser => runningUser.email === user?.email);
 
     if (!currentUser) {
         return <p className="text-center py-10 text-gray-600">User not found.</p>;
     }
-
     return (
         <div className="max-w-4xl mx-auto p-8 rounded-lg">
             <SectionTitle heading={'My Profile'} />
@@ -36,7 +39,7 @@ const AdminProfile = () => {
                         </p>
                         <p className="text-gray-600 text-lg flex items-center space-x-2">
                             <FaUserShield className="text-xl text-indigo-600" />
-                            <span>{currentUser.role}</span>
+                            <span>{currentUser.role || "User"}</span>
                         </p>
                     </div>
                 </div>
@@ -44,7 +47,7 @@ const AdminProfile = () => {
                 <div className="space-y-4">
                     <p className="text-gray-700 text-lg flex items-center space-x-2">
                         <FaAward className="text-xl text-indigo-600" />
-                        <span>Badge: {currentUser.badge}</span>
+                        <span>Badge: {currentUser.badge || "No Badge"}</span>
                     </p>
                 </div>
             </div>

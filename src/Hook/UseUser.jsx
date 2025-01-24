@@ -2,11 +2,9 @@ import useAxiosPublic from './useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 
 const UseUser = () => {
-
-
     const axiosPublic = useAxiosPublic();
 
-    const { data: userDb = [], refetch, isLoading: isUserLoading } = useQuery({
+    const { data: userDb = [], isFetching: isUserLoading, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosPublic.get('/users');
@@ -14,7 +12,7 @@ const UseUser = () => {
         },
     });
 
-    return [userDb, refetch, isUserLoading]
+    return [userDb, isUserLoading, refetch];
 };
 
 export default UseUser;
