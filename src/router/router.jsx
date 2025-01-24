@@ -18,6 +18,7 @@ import AdminProfile from "../Pages/Dashboard/AdminDashboard/AdminProfile";
 import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers";
 import AllMeals from "../Pages/Dashboard/AdminDashboard/AllMeals";
 import AllReview from "../Pages/Dashboard/AdminDashboard/AllReview.JSX";
+import AddMeal from "../Pages/Dashboard/AdminDashboard/AddMeal";
 
 const router = createBrowserRouter([
     {
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
             {
                 path: 'all-review',
                 element: <AdminRoute><AllReview></AllReview></AdminRoute>
+            },
+            {
+                path: 'add-meal',
+                element: <AdminRoute><AddMeal></AddMeal></AdminRoute>
             }
         ]
     }
