@@ -24,6 +24,7 @@ import UpComingMealPage from "../Pages/UpcomingMeals/UpComingMealPage";
 import UpcomingMealDetails from "../Pages/UpcomingMeals/UpcomingMealDetails";
 import Checkout from "../Pages/Checkout/Checkout";
 import Payment from "../Pages/Checkout/Payment";
+import PaymentHistory from "../Pages/Dashboard/UserDashboard/PaymentHistory";
 
 const router = createBrowserRouter([
     {
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
             {
                 path: 'my-reviews',
                 element: <MyReviews></MyReviews>
+            },
+            {
+                path: 'payment-history',
+                element: <PaymentHistory></PaymentHistory>
             },
 
             //admin route
