@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
-import SectionTitle from '../Shared/SectionTitle/SectionTitle';
-import { useQuery } from '@tanstack/react-query';
-import useAxiosPublic from '../../Hook/useAxiosPublic';
-import UpComingMealCard from './UpComingMealCard';
-import { AuthContext } from '../../Provider/AuthProvider';
-import UseUser from '../../Hook/UseUser';
+import { useContext } from "react";
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import SectionTitle from "../Shared/SectionTitle/SectionTitle";
+import { AuthContext } from "../../Provider/AuthProvider";
+import UseUser from "../../Hook/UseUser";
+import { useQuery } from "@tanstack/react-query";
+import UpComingMealCard from "./UpComingMealCard";
 
-const UpcomingMeals = () => {
+const UpComingMealPage = () => {
+
     const axiosPublic = useAxiosPublic();
     const { user, loading: authLoading } = useContext(AuthContext);
     const [userDb, , isUserLoading] = UseUser();
@@ -19,12 +20,16 @@ const UpcomingMeals = () => {
         },
     });
 
-    if (authLoading || isUserLoading || mealLoading) {
+    if (authLoading || mealLoading) {
         return <p className="text-center py-10">Loading data...</p>;
     }
 
-    const currentUser = userDb.find(runningUser => runningUser.email === user?.email);
+    const currentUser = userDb?.find(runningUser => runningUser.email === user?.email);
     const badge = currentUser?.badge || 'bronze';
+
+    // if (!currentUser) {
+    //     return <p className="text-center py-10 text-gray-600">Loading..</p>;
+    // }
 
     return (
         <div className="pt-24 px-4 md:px-16">
@@ -47,4 +52,4 @@ const UpcomingMeals = () => {
     );
 };
 
-export default UpcomingMeals;
+export default UpComingMealPage;

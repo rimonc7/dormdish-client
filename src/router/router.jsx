@@ -7,7 +7,6 @@ import MealDetails from "../Pages/MealDetails/MealDetails";
 import Login from "../Pages/Authetication/Login/Login";
 import JoinUs from "../Pages/Authetication/JoinUs/JoinUs";
 import Meals from "../Pages/Meals/Meals";
-import UpcomingMeals from "../Pages/UpcomingMeals/UpcomingMeals";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import UserProfile from "../Pages/Dashboard/UserDashboard/UserProfile";
@@ -20,6 +19,9 @@ import AllMeals from "../Pages/Dashboard/AdminDashboard/AllMeals";
 import AllReview from "../Pages/Dashboard/AdminDashboard/AllReview.JSX";
 import AddMeal from "../Pages/Dashboard/AdminDashboard/AddMeal";
 import ServeMeals from "../Pages/Dashboard/AdminDashboard/ServeMeals";
+import UpcomingMealsAdmin from "../Pages/Dashboard/AdminDashboard/UpcomingMealsAdmin";
+import UpComingMealPage from "../Pages/UpcomingMeals/UpComingMealPage";
+import UpcomingMealDetails from "../Pages/UpcomingMeals/UpcomingMealDetails";
 
 const router = createBrowserRouter([
     {
@@ -40,7 +42,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/upcomingMeals',
-                element: <UpcomingMeals></UpcomingMeals>
+                element: <UpComingMealPage></UpComingMealPage>
+            },
+            {
+                path: '/upcomingMeal/:id',
+                element: <UpcomingMealDetails></UpcomingMealDetails>
             }
         ],
     },
@@ -93,7 +99,12 @@ const router = createBrowserRouter([
             {
                 path: 'serve-meals',
                 element: <AdminRoute><ServeMeals></ServeMeals></AdminRoute>
-            }
+            },
+            {
+                path: 'upcoming-meals',
+                element: <AdminRoute><UpcomingMealsAdmin></UpcomingMealsAdmin></AdminRoute>
+            },
+
         ]
     }
 ]);

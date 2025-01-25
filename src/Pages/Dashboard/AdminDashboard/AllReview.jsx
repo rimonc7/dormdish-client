@@ -61,7 +61,7 @@ const AllReview = () => {
                                     <td className="p-3 text-center">{foundMeal?.title}</td>
                                     <td className="p-3 text-center">{foundMeal?.like ?? "No Data"}</td>
                                     <td className="p-3 text-center">
-                                        <Link to={`/meal/${review.mealId}`} className="btn btn-sm bg-red-600 text-white hover:bg-red-700">
+                                        <Link to={`/meal/${review.mealId}`} className="btn btn-sm bg-[#D1A054] text-white hover:bg-yellow-600 hover:scale-105">
                                             View Meal
                                         </Link>
                                     </td>

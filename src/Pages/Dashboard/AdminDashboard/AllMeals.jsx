@@ -64,7 +64,7 @@ const AllMeals = () => {
                                     <td className="p-3 text-center">{item.rating}</td>
                                     <td className="p-3 text-center">{item.distributor}</td>
                                     <td className="p-3 text-center">
-                                        <Link to={`/meal/${item._id}`} className="btn btn-sm bg-red-600 text-white hover:bg-red-700">
+                                        <Link to={`/meal/${item._id}`} className="btn btn-sm bg-[#D1A054] hover:bg-yellow-600 text-white hover:scale-105 ">
                                             View Meal
                                         </Link>
                                     </td>

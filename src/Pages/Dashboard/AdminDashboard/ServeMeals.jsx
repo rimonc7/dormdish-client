@@ -10,7 +10,7 @@ const ServeMeals = () => {
     const [search, setSearch] = useState("");
 
 
-    const { data: requestedMeals = [] } = useQuery({
+    const { data: requestedMeals = [], refetch } = useQuery({
         queryKey: ['requestedMeals', search],
         queryFn: async () => {
             const params = {};
@@ -85,7 +85,7 @@ const ServeMeals = () => {
                             requestedMeals.length === 0 ? (
                                 <tr>
                                     <td colSpan="4" className="text-center text-gray-600 p-4">
-                                       Not Found.
+                                        Not Found.
                                     </td>
                                 </tr>
                             ) :
