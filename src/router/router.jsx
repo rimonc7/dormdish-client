@@ -22,6 +22,8 @@ import ServeMeals from "../Pages/Dashboard/AdminDashboard/ServeMeals";
 import UpcomingMealsAdmin from "../Pages/Dashboard/AdminDashboard/UpcomingMealsAdmin";
 import UpComingMealPage from "../Pages/UpcomingMeals/UpComingMealPage";
 import UpcomingMealDetails from "../Pages/UpcomingMeals/UpcomingMealDetails";
+import Checkout from "../Pages/Checkout/Checkout";
+import Payment from "../Pages/Checkout/Payment";
 
 const router = createBrowserRouter([
     {
@@ -47,7 +49,12 @@ const router = createBrowserRouter([
             {
                 path: '/upcomingMeal/:id',
                 element: <UpcomingMealDetails></UpcomingMealDetails>
+            },
+            {
+                path: '/checkout/:packageName',
+                element: <PrivateRoute><Payment></Payment></PrivateRoute>
             }
+
         ],
     },
     {
