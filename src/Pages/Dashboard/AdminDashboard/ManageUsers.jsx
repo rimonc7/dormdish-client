@@ -56,7 +56,7 @@ const ManageUsers = () => {
                         {
                             userDb.map(user => (
                                 <tr key={user._id} className="border-b border-gray-200 text-sm lg:text-base">
-                                    <td className="p-3 text-center">{user.name}</td>
+                                    <td className="p-3 ">{user.name}</td>
                                     <td className="p-3 text-center">{user.email}</td>
                                     <td className="p-3 text-center">
                                         {

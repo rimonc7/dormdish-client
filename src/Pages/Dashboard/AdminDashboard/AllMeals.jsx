@@ -58,7 +58,7 @@ const AllMeals = () => {
                         {
                             meal.map(item => (
                                 <tr key={item._id} className="border-b border-gray-200 text-sm lg:text-base">
-                                    <td className="p-3 text-center">{item.title}</td>
+                                    <td className="p-3">{item.title}</td>
                                     <td className="p-3 text-center">{item.like}</td>
                                     <td className="p-3 text-center">{item.review_count || 0}</td>
                                     <td className="p-3 text-center">{item.rating}</td>

@@ -1,52 +1,35 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import MealCard from "../Home/MealsByCategory/MealCards/MealCard";
 import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
-
 
 const Meals = () => {
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState("");
     const [minPrice, setMinPrice] = useState("");
     const [maxPrice, setMaxPrice] = useState("");
-    const [meals, setMeals] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const axiosPublic = useAxiosPublic();
 
-    const fetchMeals = async () => {
-        setIsLoading(true);
-        try {
+    const { data: meals = [], isLoading } = useQuery({
+        queryKey: ['meal', search, category, minPrice, maxPrice],
+        queryFn: async () => {
             const params = {};
             if (search) params.search = search;
             if (category) params.category = category;
             if (minPrice) params.minPrice = Number(minPrice);
             if (maxPrice) params.maxPrice = Number(maxPrice);
             const response = await axiosPublic.get("/meal", { params });
-            setMeals(response.data);
-        } catch (error) {
-            console.error("Error fetching meals:", error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleFilterChange = () => {
-        fetchMeals();
-    };
-
-    useEffect(() => {
-        fetchMeals();
-    }, []);
-
-    useEffect(() => {
-        handleFilterChange();
-    }, [search, category, minPrice, maxPrice]);
-
+            return response.data;
+        },
+        keepPreviousData: true,
+    });
+   
     return (
         <div className="pt-24 px-4 md:px-16">
             <SectionTitle
-                heading={'Delicious Meals for Every Taste'}
-                subheading={'Explore a World of Flavorful Recipes'}
+                heading={"Delicious Meals for Every Taste"}
+                subheading={"Explore a World of Flavorful Recipes"}
             />
             <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6 bg-gray-100 p-6 rounded-lg shadow-md">
                 {/* Search Bar */}
@@ -101,7 +84,7 @@ const Meals = () => {
             )}
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-6">
-                {meals.map(item => (
+                {meals.map((item) => (
                     <MealCard key={item._id} item={item} />
                 ))}
             </div>

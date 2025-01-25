@@ -57,7 +57,7 @@ const AllReview = () => {
                             const foundMeal = meal.find((mealItem) => mealItem._id === review.mealId);
                             return (
                                 <tr key={review._id} className="border-b border-gray-200 text-sm lg:text-base">
-                                    <td className="p-3 text-center">{review.name}</td>
+                                    <td className="p-3 ">{review.name}</td>
                                     <td className="p-3 text-center">{foundMeal?.title}</td>
                                     <td className="p-3 text-center">{foundMeal?.like ?? "No Data"}</td>
                                     <td className="p-3 text-center">
