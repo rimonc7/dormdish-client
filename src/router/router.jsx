@@ -19,6 +19,7 @@ import ManageUsers from "../Pages/Dashboard/AdminDashboard/ManageUsers";
 import AllMeals from "../Pages/Dashboard/AdminDashboard/AllMeals";
 import AllReview from "../Pages/Dashboard/AdminDashboard/AllReview.JSX";
 import AddMeal from "../Pages/Dashboard/AdminDashboard/AddMeal";
+import ServeMeals from "../Pages/Dashboard/AdminDashboard/ServeMeals";
 
 const router = createBrowserRouter([
     {
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
             {
                 path: 'add-meal',
                 element: <AdminRoute><AddMeal></AddMeal></AdminRoute>
+            },
+            {
+                path: 'serve-meals',
+                element: <AdminRoute><ServeMeals></ServeMeals></AdminRoute>
             }
         ]
     }

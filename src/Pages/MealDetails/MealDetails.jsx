@@ -88,6 +88,7 @@ const MealDetails = () => {
         } else {
             const mealReqInfo = {
                 email: user.email,
+                user_name: user.displayName,
                 mealId: _id,
                 review_count: filteredReviews.length,
                 status: 'pending',
