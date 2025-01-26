@@ -16,7 +16,6 @@ const MealDetails = () => {
     const [reviewText, setReviewText] = useState('');
 
 
-
     const { data: meal = {}, isLoading, refetch } = useQuery({
         queryKey: ['meal', id],
         queryFn: async () => {

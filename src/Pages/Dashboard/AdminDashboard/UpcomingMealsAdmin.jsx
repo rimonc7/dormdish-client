@@ -2,6 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import SectionTitle from '../../Shared/SectionTitle/SectionTitle';
 import useAxiosPublic from '../../../Hook/useAxiosPublic';
+import useAxiosSecure from '../../../Hook/useAxiosSecure';
 import { Link } from 'react-router-dom';
 import { AiOutlineCheckCircle, AiOutlinePlusCircle } from 'react-icons/ai';
 import Swal from 'sweetalert2';
@@ -14,6 +15,8 @@ const UpcomingMealsAdmin = () => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useContext(AuthContext);
     const [sortedByLikes, setSortedByLikes] = useState(false);
+    const axiosSecure = useAxiosSecure();
+
 
     const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 
@@ -66,7 +69,7 @@ const UpcomingMealsAdmin = () => {
                 like: parseFloat(data.likes),
                 review_count: parseFloat(data.review_count),
             };
-            const mealRes = await axiosPublic.post('/upcomingMeal', mealInfo);
+            const mealRes = await axiosSecure.post('/upcomingMeal', mealInfo);
             if (mealRes.data.insertedId) {
                 reset();
                 document.getElementById('my_modal_1').close()
@@ -83,7 +86,7 @@ const UpcomingMealsAdmin = () => {
 
     const handlePublish = async (id, like) => {
         if (like >= 10) {
-            const res = await axiosPublic.post(`/publishMeal/${id}`);
+            const res = await axiosSecure.post(`/publishMeal/${id}`);
             if (res.data.message) {
                 refetch();
                 Swal.fire({
@@ -92,11 +95,11 @@ const UpcomingMealsAdmin = () => {
                     icon: "success",
                     confirmButtonText: "Great!"
                 });
-                return; 
+                return;
             }
         }
         try {
-            const res = await axiosPublic.post(`/publishMeal/${id}`);
+            const res = await axiosSecure.post(`/publishMeal/${id}`);
             if (res.data.message) {
                 refetch();
                 Swal.fire("Published!", "The meal has been published successfully.", "success");
@@ -106,8 +109,8 @@ const UpcomingMealsAdmin = () => {
             Swal.fire("Error", "There was an error publishing the meal.", "error");
         }
     };
-    
-    
+
+
 
     useEffect(() => {
         upcomingMeals.forEach((meal) => {

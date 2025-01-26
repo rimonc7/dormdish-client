@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -15,6 +16,7 @@ const AddMeal = () => {
     const { register, handleSubmit, reset } = useForm();
     const { user } = useContext(AuthContext);
     const axiosPublic = useAxiosPublic();
+    const axiosSecure= useAxiosSecure();
 
 
     const handleAddMeal = async (data) => {
@@ -46,7 +48,7 @@ const AddMeal = () => {
                 like: parseFloat(data.likes),
                 review_count: parseFloat(data.review_count),
             };
-            const mealRes = await axiosPublic.post('/meal', mealInfo);
+            const mealRes = await axiosSecure.post('/meal', mealInfo);
             if (mealRes.data.insertedId) {
                 reset();
                 Swal.fire({

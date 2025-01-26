@@ -1,10 +1,10 @@
 import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
 import { useContext, useState, useEffect } from "react";
-import useAxiosPublic from "../../Hook/useAxiosPublic";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useLocation, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import UseUser from "../../Hook/UseUser";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
 
 const Checkout = () => {
     const stripe = useStripe();
@@ -13,7 +13,7 @@ const Checkout = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const { user } = useContext(AuthContext);
     const { packageName } = useParams()
     const location = useLocation();
@@ -22,16 +22,16 @@ const Checkout = () => {
 
 
     const currentUser = userDb?.find(usr => usr.email === user.email)
-    console.log(currentUser)
+
 
     useEffect(() => {
         if (price > 0) {
-            axiosPublic.post('/create-checkout-session', { price: price })
+            axiosSecure.post('/create-checkout-session', { price: price })
                 .then(res => {
                     setClientSecret(res.data.clientSecret);
                 });
         }
-    }, [axiosPublic, price]);
+    }, [axiosSecure, price]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -76,7 +76,6 @@ const Checkout = () => {
                 setErrorMessage(error.message);
                 setLoading(false);
             } else {
-                console.log('Payment Intent:', paymentIntent);
                 if (paymentIntent.status === 'succeeded') {
                     setTransactionId(paymentIntent.id);
                     setLoading(false);
@@ -88,7 +87,7 @@ const Checkout = () => {
                         date: new Date(),
                     };
 
-                    const res = await axiosPublic.post('/payments', payment);
+                    const res = await axiosSecure.post('/payments', payment);
                     if (res.data?.paymentResult?.insertedId) {
                         Swal.fire({
                             title: "Payment Success",
@@ -99,7 +98,7 @@ const Checkout = () => {
                         const packageInfo = {
                             packageName
                         }
-                        axiosPublic.patch(`/users/badge/${currentUser._id}`, packageInfo)
+                        axiosSecure.patch(`/users/badge/${currentUser._id}`, packageInfo)
                             .then(res => {
                                 if (res.data.modifiedCount > 0) {
                                     // Swal.fire("Status Updated", "", "success");
@@ -110,6 +109,10 @@ const Checkout = () => {
             }
         }
     };
+
+    if (isUserLoading) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div>

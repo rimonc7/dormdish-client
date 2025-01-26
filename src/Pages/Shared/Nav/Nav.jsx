@@ -22,9 +22,6 @@ const Nav = () => {
             <NavLink to="/upcomingMeals" className="block lg:inline text-white hover:text-orange-300">
                 UPCOMING MEALS
             </NavLink>
-            <NavLink to="/shop" className="block lg:inline text-white hover:text-orange-300">
-                OUR SHOP
-            </NavLink>
             {
                 user && isAdmin && <NavLink to="/dashboard/admin-profile" className="block lg:inline text-white hover:text-orange-300">
                     DASHBOARD
@@ -89,7 +86,7 @@ const Nav = () => {
                     </button>
                     <ul
                         tabIndex={0}
-                        className="menu menu-sm dropdown-content mt-3 w-52 bg-white text-black rounded-box shadow-lg"
+                        className="menu menu-sm dropdown-content mt-3 w-52 bg-blue-500 text-white rounded-box shadow-lg"
                     >
                         {links}
                         {authLinks}

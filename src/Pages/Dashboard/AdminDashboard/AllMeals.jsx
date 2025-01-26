@@ -3,20 +3,15 @@ import UseMeal from "../../../Hook/UseMeal";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import { useMemo, useState } from 'react';
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 
 const AllMeals = () => {
     const [meal, isLoading, refetch] = UseMeal();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const [sortedByLikes, setSortedByLikes] = useState(false);
     const [sortedByReview, setSortedByReview] = useState(false);
-
-
-    if (isLoading) {
-        return <p className="text-center py-10 text-gray-600">Loading...</p>;
-    }
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -27,7 +22,7 @@ const AllMeals = () => {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                axiosPublic.delete(`/meal/${id}`)
+                axiosSecure.delete(`/meal/${id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             Swal.fire("Deleted", "", "success");
@@ -59,7 +54,12 @@ const AllMeals = () => {
         }
         return meal;
     }, [sortedByLikes, sortedByReview, meal]);
-    
+
+
+    if (isLoading) {
+        return <p className="text-center py-10 text-gray-600">Loading...</p>;
+    }
+
 
     return (
         <div>

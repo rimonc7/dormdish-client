@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import UseMeal from "../../../Hook/UseMeal";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
@@ -18,6 +19,7 @@ const UpdateMeal = () => {
     const { user } = useContext(AuthContext);
     const [meal, isLoading, refetch] = UseMeal();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
     const item = meal?.find((singleMeal) => singleMeal._id === id);
 
@@ -71,8 +73,8 @@ const UpdateMeal = () => {
             review_count: parseFloat(data.review_count),
         };
 
-        const mealRes = await axiosPublic.put(`/meal/${id}`, mealInfo);
-        console.log(mealRes)
+        const mealRes = await axiosSecure.put(`/meal/${id}`, mealInfo);
+        // console.log(mealRes)
         if (mealRes.data.modifiedCount) {
             refetch();
             Swal.fire({

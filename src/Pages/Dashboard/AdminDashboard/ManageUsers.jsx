@@ -2,11 +2,11 @@ import { FaUserShield } from "react-icons/fa";
 import UseUser from "../../../Hook/UseUser";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 const ManageUsers = () => {
     const [userDb, isUserLoading, refetch] = UseUser();
-    const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
 
 
     if (isUserLoading) {
@@ -23,7 +23,7 @@ const ManageUsers = () => {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                axiosPublic.patch(`/users/admin/${id}`)
+                axiosSecure.patch(`/users/admin/${id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch();
