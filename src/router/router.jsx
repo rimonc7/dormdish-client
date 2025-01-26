@@ -25,6 +25,7 @@ import UpcomingMealDetails from "../Pages/UpcomingMeals/UpcomingMealDetails";
 import Checkout from "../Pages/Checkout/Checkout";
 import Payment from "../Pages/Checkout/Payment";
 import PaymentHistory from "../Pages/Dashboard/UserDashboard/PaymentHistory";
+import UpdateMeal from "../Pages/Dashboard/AdminDashboard/UpdateMeal";
 
 const router = createBrowserRouter([
     {
@@ -99,6 +100,10 @@ const router = createBrowserRouter([
             {
                 path: 'all-meals',
                 element: <AdminRoute><AllMeals></AllMeals></AdminRoute>
+            },
+            {
+                path: 'update/:id',
+                element: <AdminRoute><UpdateMeal></UpdateMeal></AdminRoute>
             },
             {
                 path: 'all-review',

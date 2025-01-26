@@ -63,7 +63,7 @@ const UpcomingMealsAdmin = () => {
                 distributor: data.distributor,
                 email: data.email,
                 rating: parseFloat(data.rating),
-                likes: parseFloat(data.likes),
+                like: parseFloat(data.likes),
                 review_count: parseFloat(data.review_count),
             };
             const mealRes = await axiosPublic.post('/upcomingMeal', mealInfo);
