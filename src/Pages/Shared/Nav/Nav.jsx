@@ -45,20 +45,20 @@ const Nav = () => {
                     Logout
                 </button>
             ) : (
-                <>
+                <div className="flex flex-col gap-1 lg:block lg:space-x-2">
                     <NavLink
                         to="/login"
-                        className="block lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300"
+                        className="lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300"
                     >
                         Login
                     </NavLink>
                     <NavLink
                         to="/joinUs"
-                        className="block lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300"
+                        className=" lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300"
                     >
                         Join Us
                     </NavLink>
-                </>
+                </div>
             )}
         </div>
     );
@@ -107,13 +107,12 @@ const Nav = () => {
                 <div className="relative">
                     <FaBell className="text-2xl cursor-pointer hover:text-orange-300" />
                     <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-1">
-                        3
                     </span>
                 </div>
                 <div className="hidden lg:flex">{authLinks}</div>
                 {user ? (
                     <img
-                        className="w-12 h-12 mx-6 rounded-full"
+                        className="w-12 h-12 mx-6 rounded-full border-2"
                         src={user.photoURL}
                         alt=""
                         title={user.displayName || "User"}

@@ -3,11 +3,14 @@ import UseRequestedMeal from "../../../Hook/UseRequestedMeal";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import { useState } from "react";
 
 const RequestedMeals = () => {
     const [requestedMeals, refetch] = UseRequestedMeal();
     const axiosPublic = useAxiosPublic();
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 5;
+    const totalPages = Math.ceil(requestedMeals.length / itemsPerPage);
 
     const handleDelete = (id, status) => {
 
