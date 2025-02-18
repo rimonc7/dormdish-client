@@ -26,6 +26,7 @@ import Checkout from "../Pages/Checkout/Checkout";
 import Payment from "../Pages/Checkout/Payment";
 import PaymentHistory from "../Pages/Dashboard/UserDashboard/PaymentHistory";
 import UpdateMeal from "../Pages/Dashboard/AdminDashboard/UpdateMeal";
+import About from "../Pages/About/About";
 
 const router = createBrowserRouter([
     {
@@ -55,7 +56,12 @@ const router = createBrowserRouter([
             {
                 path: '/checkout/:packageName',
                 element: <PrivateRoute><Payment></Payment></PrivateRoute>
-            }
+            },
+            {
+                path: '/about',
+                element: <About></About>
+            },
+
 
         ],
     },
