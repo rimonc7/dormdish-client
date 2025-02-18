@@ -1,4 +1,5 @@
 import Banner from "./Banner/Banner";
+import FAQ from "./FAQ/FAQ";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import MealsByCategory from "./MealsByCategory/MealsByCategory";
 import Membership from "./Membership/Membership";
@@ -14,6 +15,7 @@ const Home = () => {
             <Membership></Membership>
             <Testimonial></Testimonial>
             <Support></Support>
+            <FAQ></FAQ>
         </div>
     );
 };
