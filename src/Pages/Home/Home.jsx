@@ -1,6 +1,7 @@
 import Banner from "./Banner/Banner";
 import FAQ from "./FAQ/FAQ";
 import HowItWorks from "./HowItWorks/HowItWorks";
+import Join from "./Join/Join";
 import MealsByCategory from "./MealsByCategory/MealsByCategory";
 import Membership from "./Membership/Membership";
 import Support from "./Support/Support";
@@ -13,9 +14,10 @@ const Home = () => {
             <MealsByCategory></MealsByCategory>
             <HowItWorks></HowItWorks>
             <Membership></Membership>
-            <Testimonial></Testimonial>
             <Support></Support>
             <FAQ></FAQ>
+            <Testimonial></Testimonial>
+            <Join></Join>
         </div>
     );
 };

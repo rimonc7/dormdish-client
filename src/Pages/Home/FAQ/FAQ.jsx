@@ -8,17 +8,24 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="py-16 bg-gray-100">
-      <div className="max-w-4xl mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
-        <div className="space-y-4">
+    <div className="py-20 bg-gradient-to-b from-gray-100 to-white relative">
+      <div className="absolute top-0 left-0 w-full h-40 bg-blue-100  rounded-b-3xl flex items-center justify-center">
+        <h2 className="text-4xl font-extrabold text-center ">
+          Frequently Asked Questions
+        </h2>
+      </div>
+      <div className="max-w-4xl mx-auto px-6 relative z-10 pt-32">
+        <div className="space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="collapse collapse-arrow bg-white shadow-md rounded-lg">
+            <div
+              key={index}
+              className="collapse collapse-arrow bg-white rounded-lg shadow-lg border border-gray-200 p-5"
+            >
               <input type="radio" name="faq-accordion" defaultChecked={index === 0} />
-              <div className="collapse-title text-xl font-medium text-gray-800 capitalize">
+              <div className="collapse-title text-2xl font-medium text-gray-800 capitalize">
                 {faq.question}
               </div>
-              <div className="collapse-content text-gray-600">
+              <div className="collapse-content text-gray-600 text-lg">
                 <p>{faq.answer}</p>
               </div>
             </div>
