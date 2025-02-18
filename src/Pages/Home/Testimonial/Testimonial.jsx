@@ -60,7 +60,7 @@ const Testimonial = () => {
                 <h3 className="text-xl font-semibold">{testimonials[currentIndex].name}</h3>
                 <div className="flex justify-center gap-4 mt-6">
                     <button
-                        className="btn btn-circle btn-outline text-orange-500 font-bold"
+                        className="btn btn-circle btn-outline text-orange-500 font-bold "
                         onClick={handlePrev}
                     >
                         <FaArrowLeft />

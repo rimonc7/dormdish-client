@@ -41,7 +41,7 @@ const Membership = () => {
 
 
     return (
-        <div id="subscription" className=" bg-gray-100 flex flex-col items-center justify-center p-6">
+        <div id="subscription" className=" flex flex-col items-center justify-center p-6 mb-10">
             <SectionTitle
                 heading={'Choose Your Premium Package'}
             >

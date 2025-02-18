@@ -1,5 +1,3 @@
-// About.js
-import React from 'react';
 import { FaUniversity, FaUtensils, FaStar, FaUsers } from 'react-icons/fa';
 import SectionTitle from '../Shared/SectionTitle/SectionTitle';
 
@@ -46,7 +44,7 @@ const About = () => {
                 Foster a vibrant community among students and staff. Our support tools keep everyone connected and informed.
               </p>
             </div>
-            
+
           </div>
         </div>
       </div>
