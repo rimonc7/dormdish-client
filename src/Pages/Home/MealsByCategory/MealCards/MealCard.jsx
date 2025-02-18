@@ -35,7 +35,7 @@ const MealCard = ({ item }) => {
                 <div className="w-full">
                     <Link
                         to={`/meal/${_id}`}
-                        className="block btn btn-primary border-none text-white py-3 rounded-lg font-medium bg-orange-500 hover:bg-orange-600 transition duration-300"
+                        className="w-full btn btn-primary border-none text-white py-3 rounded-lg font-medium bg-orange-500 hover:bg-orange-600 transition duration-300"
                     >
                         View Details
                     </Link>
