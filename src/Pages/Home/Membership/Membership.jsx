@@ -68,7 +68,7 @@ const Membership = () => {
                             <Link
                                 to={`/checkout/${pkg.name}`}
                                 state={{ price: pkg.price }}
-                                className="bg-gray-800 text-white py-2 px-6 rounded-md hover:bg-gray-900 transition-colors">
+                                className="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-gray-900 transition-colors">
                                 Select {pkg.name}
                             </Link>
                         </div>

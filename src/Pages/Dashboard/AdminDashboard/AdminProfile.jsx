@@ -24,21 +24,21 @@ const AdminProfile = () => {
             <div className="bg-white p-6 rounded-lg shadow-md">
                 <div className="flex items-center space-x-6 mb-6">
                     <img
-                        className="w-28 h-28 rounded-full object-cover border-4 border-indigo-500 shadow-lg"
+                        className="w-28 h-28 rounded-full object-cover border-4 border-orange-500 shadow-lg"
                         src={currentUser.photo}
                         alt="User Profile"
                     />
                     <div>
                         <h2 className="text-3xl font-semibold text-gray-800 flex items-center space-x-2">
-                            <FaUser className="text-2xl text-indigo-600" />
+                            <FaUser className="text-2xl text-orange-500" />
                             <span>{currentUser.name}</span>
                         </h2>
                         <p className="text-gray-600 text-lg flex items-center space-x-2">
-                            <FaEnvelope className="text-xl text-indigo-600" />
+                            <FaEnvelope className="text-xl text-orange-500" />
                             <span>{currentUser.email}</span>
                         </p>
                         <p className="text-gray-600 text-lg flex items-center space-x-2">
-                            <FaUserShield className="text-xl text-indigo-600" />
+                            <FaUserShield className="text-xl text-orange-500" />
                             <span>{currentUser.role || "User"}</span>
                         </p>
                     </div>
@@ -46,7 +46,7 @@ const AdminProfile = () => {
 
                 <div className="space-y-4">
                     <p className="text-gray-700 text-lg flex items-center space-x-2">
-                        <FaAward className="text-xl text-indigo-600" />
+                        <FaAward className="text-xl text-orange-500" />
                         <span>Badge: {currentUser.badge || "No Badge"}</span>
                     </p>
                 </div>

@@ -27,6 +27,7 @@ import Payment from "../Pages/Checkout/Payment";
 import PaymentHistory from "../Pages/Dashboard/UserDashboard/PaymentHistory";
 import UpdateMeal from "../Pages/Dashboard/AdminDashboard/UpdateMeal";
 import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
 
 const router = createBrowserRouter([
     {
@@ -61,8 +62,10 @@ const router = createBrowserRouter([
                 path: '/about',
                 element: <About></About>
             },
-
-
+            {
+                path: '/contact',
+                element: <Contact></Contact>
+            }
         ],
     },
     {
