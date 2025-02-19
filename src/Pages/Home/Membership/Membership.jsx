@@ -1,9 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
 import SectionTitle from "../../Shared/SectionTitle/SectionTitle";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const Membership = () => {
     const { hash } = useLocation();
+    const { darkTheme } = useContext(ThemeContext); 
 
     useEffect(() => {
         if (hash) {
@@ -38,25 +40,21 @@ const Membership = () => {
         },
     ];
 
-
-
     return (
-        <div id="subscription" className=" flex flex-col items-center justify-center p-6 mb-10">
+        <div id="subscription" className={`flex flex-col items-center justify-center p-6 mb-10 ${darkTheme ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>
             <SectionTitle
                 heading={'Choose Your Premium Package'}
-            >
-            </SectionTitle>
-
+            />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
                 {packages.map((pkg) => (
                     <div
                         key={pkg.name}
-                        className={`flex flex-col justify-between cursor-pointer ${pkg.bgClass} rounded-lg shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300`}
+                        className={`flex flex-col justify-between cursor-pointer rounded-lg shadow-lg p-6 text-center hover:shadow-2xl transition-shadow duration-300 ${darkTheme ? 'bg-gray-700' : pkg.bgClass}`}
                     >
-                        <h2 className="text-2xl font-bold text-gray-800 mb-2">{pkg.name}</h2>
-                        <p className="text-lg font-semibold text-gray-700 mb-4">${pkg.price}/month</p>
-                        <p className="text-gray-600 mb-4">{pkg.description}</p>
-                        <ul className="text-left text-gray-700 mb-6">
+                        <h2 className={`text-2xl font-bold mb-2 ${darkTheme ? 'text-white' : 'text-gray-800'}`}>{pkg.name}</h2>
+                        <p className={`text-lg font-semibold mb-4 ${darkTheme ? 'text-gray-300' : 'text-gray-700'}`}>${pkg.price}/month</p>
+                        <p className={`mb-4 ${darkTheme ? 'text-gray-400' : 'text-gray-600'}`}>{pkg.description}</p>
+                        <ul className={`text-left mb-6 ${darkTheme ? 'text-gray-300' : 'text-gray-700'}`}>
                             {pkg.benefits.map((benefit, index) => (
                                 <li key={index} className="flex items-center space-x-2">
                                     <span>✔️</span>
@@ -68,7 +66,8 @@ const Membership = () => {
                             <Link
                                 to={`/checkout/${pkg.name}`}
                                 state={{ price: pkg.price }}
-                                className="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-gray-900 transition-colors">
+                                className="bg-orange-500 text-white py-2 px-6 rounded-md hover:bg-gray-900 transition-colors"
+                            >
                                 Select {pkg.name}
                             </Link>
                         </div>

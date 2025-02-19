@@ -1,5 +1,8 @@
+import { useContext } from "react";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const FAQ = () => {
+  const { darkTheme } = useContext(ThemeContext);
   const faqs = [
     { question: 'How do I register for Dorm Dish?', answer: 'Simply sign up using your university email and start exploring our features.' },
     { question: 'Can I change my meal preferences?', answer: 'Yes, you can update your meal preferences anytime from your dashboard.' },
@@ -8,9 +11,9 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="py-20 bg-gradient-to-b from-gray-100 to-white relative">
-      <div className="absolute top-0 left-0 w-full h-40 bg-blue-100  rounded-b-3xl flex items-center justify-center">
-        <h2 className="text-4xl font-extrabold text-center ">
+    <div className={`py-20 relative ${darkTheme ? "bg-gradient-to-b from-gray-800 to-gray-700" : "bg-gradient-to-b from-gray-100 to-white"}`}>
+      <div className={`absolute top-0 left-0 w-full h-40 ${darkTheme ? "bg-gray-900" : "bg-blue-100"} rounded-b-3xl flex items-center justify-center`}>
+        <h2 className={`text-4xl font-extrabold text-center ${darkTheme ? "text-white" : "text-gray-800"}`}>
           Frequently Asked Questions
         </h2>
       </div>
@@ -19,13 +22,13 @@ const FAQ = () => {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="collapse collapse-arrow bg-white rounded-lg shadow-lg border border-gray-200 p-5"
+              className={`collapse collapse-arrow rounded-lg shadow-lg p-5 ${darkTheme ? "bg-gray-800 border border-gray-700" : "bg-white border border-gray-200"}`}
             >
               <input type="radio" name="faq-accordion" defaultChecked={index === 0} />
-              <div className="collapse-title text-2xl font-medium text-gray-800 capitalize">
+              <div className={`collapse-title text-2xl font-medium capitalize ${darkTheme ? "text-white" : "text-gray-800"}`}>
                 {faq.question}
               </div>
-              <div className="collapse-content text-gray-600 text-lg">
+              <div className={`collapse-content text-lg ${darkTheme ? "text-gray-300" : "text-gray-600"}`}>
                 <p>{faq.answer}</p>
               </div>
             </div>

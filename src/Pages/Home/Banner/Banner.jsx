@@ -5,8 +5,12 @@ import { Navigation, Autoplay, Mousewheel, Keyboard } from "swiper/modules";
 import slide1 from "../../../assets/slide1.jpg";
 import slide2 from "../../../assets/slide2.jpg";
 import slide3 from "../../../assets/slide3.jpg";
+import { useContext } from "react";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const Banner = ({ setSearchQuery }) => {
+  const { darkTheme } = useContext(ThemeContext);
+
   return (
     <div className="relative">
       <Swiper
@@ -27,7 +31,7 @@ const Banner = ({ setSearchQuery }) => {
               alt="Slide 1"
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute inset-0 bg-black opacity-40"></div>
+            <div className={`absolute inset-0 ${darkTheme ? 'bg-black opacity-60' : 'bg-black opacity-40'}`}></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
               <h1 className="text-4xl font-bold mb-4">
                 Delicious Meals Delivered
@@ -46,7 +50,7 @@ const Banner = ({ setSearchQuery }) => {
               alt="Slide 2"
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute inset-0 bg-black opacity-40"></div>
+            <div className={`absolute inset-0 ${darkTheme ? 'bg-black opacity-60' : 'bg-black opacity-40'}`}></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
               <h1 className="text-4xl font-bold mb-4">
                 Fresh and Fast Delivery
@@ -65,7 +69,7 @@ const Banner = ({ setSearchQuery }) => {
               alt="Slide 3"
               className="w-full h-[400px] object-cover"
             />
-            <div className="absolute inset-0 bg-black opacity-40"></div>
+            <div className={`absolute inset-0 ${darkTheme ? 'bg-black opacity-60' : 'bg-black opacity-40'}`}></div>
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
               <h1 className="text-4xl font-bold mb-4">Healthy Meals for You</h1>
               <p className="text-xl mb-6">
@@ -78,7 +82,7 @@ const Banner = ({ setSearchQuery }) => {
       <div className="absolute inset-x-0 top-60 flex flex-col justify-center items-center z-10">
         <input
           type="text"
-          className="p-2 rounded-md w-72 text-black"
+          className={`p-2 rounded-md w-72 ${darkTheme ? 'text-white bg-gray-800' : 'text-black bg-white'} focus:outline-none`}
           placeholder="Search for meals"
           onChange={(e) => setSearchQuery(e.target.value || "")}
         />

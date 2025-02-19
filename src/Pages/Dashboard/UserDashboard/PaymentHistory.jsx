@@ -19,7 +19,7 @@ const PaymentHistory = () => {
         enabled: !!user?.email,
     });
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading) return <div className="text-center">Loading...</div>;
     if (error) return <div>Error loading payment history.</div>;
 
     return (

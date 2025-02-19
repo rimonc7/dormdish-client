@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import MealCard from "../Home/MealsByCategory/MealCards/MealCard";
 import SectionTitle from "../Shared/SectionTitle/SectionTitle";
 import useAxiosPublic from "../../Hook/useAxiosPublic";
 import { FaSortAmountDown, FaSortAmountUp } from "react-icons/fa";
+import { ThemeContext } from "../../Provider/ThemeProvider";
 
 const Meals = () => {
+  const { darkTheme } = useContext(ThemeContext);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [minPrice, setMinPrice] = useState("");
@@ -37,29 +39,44 @@ const Meals = () => {
   });
 
   return (
-    <div className="pt-24 px-4 md:px-16">
+    <div
+      className={`pt-24 px-4 md:px-16 mb-9 ${
+        darkTheme ? "bg-gray-900 text-white" : "bg-white text-black"
+      }`}
+    >
       <SectionTitle
         heading={"Delicious Meals for Every Taste"}
         subheading={"Explore a World of Flavorful Recipes"}
       />
-      <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6 bg-gray-100 p-6 rounded-lg shadow-md">
-        {/* Search Bar */}
+
+      <div
+        className={`flex flex-col sm:flex-row justify-between gap-4 mt-6 p-6 rounded-lg shadow-md ${
+          darkTheme ? "bg-gray-800" : "bg-gray-100"
+        }`}
+      >
         <div className="flex items-center space-x-2 w-full sm:w-1/3">
           <input
             type="text"
             placeholder="Search meals..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="input input-bordered w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-orange-400"
+            className={`input input-bordered w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-orange-400 ${
+              darkTheme
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-black border-gray-300"
+            }`}
           />
         </div>
 
-        {/* Filter by Category */}
         <div className="flex items-center space-x-2 w-full sm:w-1/4">
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="select select-bordered w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-orange-400"
+            className={`select select-bordered w-full px-4 py-2 rounded-md focus:ring-2 focus:ring-orange-400 ${
+              darkTheme
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-black border-gray-300"
+            }`}
           >
             <option value="">All Categories</option>
             <option value="breakfast">Breakfast</option>
@@ -68,14 +85,17 @@ const Meals = () => {
           </select>
         </div>
 
-        {/* Price Range */}
         <div className="flex items-center space-x-2 w-full sm:w-1/4">
           <input
             type="number"
             placeholder="Min Price"
             value={minPrice}
             onChange={(e) => setMinPrice(e.target.value)}
-            className="input input-bordered w-1/2 px-4 py-2 rounded-md focus:ring-2 focus:ring-orange-400"
+            className={`input input-bordered w-1/2 px-4 py-2 rounded-md focus:ring-2 focus:ring-orange-400 ${
+              darkTheme
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-black border-gray-300"
+            }`}
           />
           <span className="text-xl text-gray-500">-</span>
           <input
@@ -83,10 +103,15 @@ const Meals = () => {
             placeholder="Max Price"
             value={maxPrice}
             onChange={(e) => setMaxPrice(e.target.value)}
-            className="input input-bordered w-1/2 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500"
+            className={`input input-bordered w-1/2 px-4 py-2 rounded-md focus:ring-2 focus:ring-orange-400 ${
+              darkTheme
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-black border-gray-300"
+            }`}
           />
         </div>
-        {/*sort button*/}
+
+        {/* Sort Button */}
         <button
           onClick={handleSort}
           className={`btn text-white ${
@@ -95,7 +120,7 @@ const Meals = () => {
               : "bg-orange-500 hover:bg-orange-400"
           }`}
         >
-          Sort
+          Sort{" "}
           {sortOrder ? (
             <FaSortAmountUp className="text-xl" />
           ) : (

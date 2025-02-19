@@ -4,10 +4,13 @@ import "./Nav.css";
 import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useAdmin from "../../../Hook/useAdmin";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const Nav = () => {
   const { user, logOutUser } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
+  const { toggleTheme, darkTheme } = useContext(ThemeContext);
 
   const links = (
     <div className="space-y-2 lg:space-x-4 lg:space-y-0 uppercase">
@@ -79,7 +82,7 @@ const Nav = () => {
           </NavLink>
           <NavLink
             to="/joinUs"
-            className=" lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300"
+            className="lg:inline btn btn-sm btn-outline border-white text-white hover:bg-orange-300"
           >
             Join Us
           </NavLink>
@@ -89,7 +92,9 @@ const Nav = () => {
   );
 
   return (
-    <div className="navbar fixed z-20 bg-gradient-to-r from-blue-500 to-orange-400 bg-opacity-50 text-white shadow-lg">
+    <div
+      className={`navbar fixed z-20 bg-gradient-to-r ${darkTheme ? 'from-gray-800 to-gray-900' : 'from-blue-500 to-orange-400'} bg-opacity-50 text-white shadow-lg px-3 lg:px-10`}
+    >
       <div className="navbar-start">
         {/* Dropdown for small screens */}
         <div className="dropdown lg:hidden">
@@ -144,6 +149,16 @@ const Nav = () => {
         ) : (
           <FaUserCircle className="text-4xl mx-6" title="Guest User" />
         )}
+        <button
+          onClick={toggleTheme}
+          className={`flex items-center justify-center p-2 rounded-full transition-all duration-300 ${darkTheme ? 'bg-yellow-500 text-black' : 'bg-gray-800 text-white'} hover:bg-gray-600`}
+        >
+          {darkTheme ? (
+            <MdLightMode size={24} />
+          ) : (
+            <MdDarkMode size={24} />
+          )}
+        </button>
       </div>
     </div>
   );

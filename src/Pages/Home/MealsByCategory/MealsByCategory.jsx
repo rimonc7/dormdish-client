@@ -3,10 +3,14 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import UseMeal from "../../../Hook/UseMeal";
 import MealCards from "./MealCards/MealCards";
+import { useContext } from "react";
+import { ThemeContext } from "../../../Provider/ThemeProvider";
 
 const MealsByCategory = ({ searchQuery }) => {
   const [meal] = UseMeal();
   const lowerCaseQuery = (searchQuery || "").toLowerCase();
+  const { toggleTheme, darkTheme } = useContext(ThemeContext);
+
 
   const filteredMeals = meal?.filter((item) =>
     item.title?.toLowerCase().includes(lowerCaseQuery)
